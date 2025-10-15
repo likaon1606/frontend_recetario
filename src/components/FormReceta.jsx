@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
-import { api } from "../config/api"; // tu instancia axios
+import { api } from "../config/api"; 
 
 export default function FormReceta({ onSubmit, receta, onEdit }) {
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [ingredientes, setIngredientes] = useState([]); // ingredientes seleccionados en la receta
-  const [allIngredientes, setAllIngredientes] = useState([]); // todos los ingredientes del backend
+  const [ingredientes, setIngredientes] = useState([]); 
+  const [allIngredientes, setAllIngredientes] = useState([]); 
 
   useEffect(() => {
-    // Cargar ingredientes del backend
     const fetchIngredientes = async () => {
       try {
         const res = await api.get("/ingredientes");
-        setAllIngredientes(res.data); // <-- usamos esto para los checkboxes
+        setAllIngredientes(res.data); 
       } catch (error) {
         console.error("Error cargando ingredientes:", error);
       }
@@ -65,7 +64,7 @@ export default function FormReceta({ onSubmit, receta, onEdit }) {
 
   return (
     <form onSubmit={handleSubmit} className="card p-3 mb-4 shadow-sm">
-      {/* Inputs de nombre, categoría y descripción */}
+
       <div className="mb-2">
         <input
           type="text"
@@ -93,7 +92,6 @@ export default function FormReceta({ onSubmit, receta, onEdit }) {
         />
       </div>
 
-      {/* Checkboxes de ingredientes reales del backend */}
       <div className="mb-2">
         <span className="fw-semibold">Ingredientes:</span>
         <div className="d-flex flex-wrap gap-2 mt-1">
